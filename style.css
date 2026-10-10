@@ -226,6 +226,14 @@ h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradi
   font-size: 22px;
 }
 
+.term-name .term-sql-logo {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  display: block;
+  color: var(--primary);
+}
+
 /* فونت و ظاهر مستطیل‌ها */
 .term-bar {
   font-family: 'Courier New', Courier, monospace;
