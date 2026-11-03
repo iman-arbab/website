@@ -1,45 +1,96 @@
-// مدیریت منوی همبرگری در نسخه موبایل
 const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
+const navbar = document.querySelector(".nav");
+const mobileLayout = window.matchMedia("(max-width: 850px)");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+function setMenuOpen(open) {
+  navLinks.classList.toggle("show", open);
+  menuBtn.setAttribute("aria-expanded", String(open));
+  if (open) navbar.classList.remove("nav-hidden");
+}
 
 menuBtn.addEventListener("click", () => {
-  navLinks.classList.toggle("show");
+  setMenuOpen(menuBtn.getAttribute("aria-expanded") !== "true");
 });
 
-document.querySelectorAll(".nav-links a").forEach(link => {
-  link.addEventListener("click", () => navLinks.classList.remove("show"));
+navLinks.addEventListener("click", (event) => {
+  if (event.target.closest("a")) setMenuOpen(false);
 });
 
-// سیستم انیمیشن ورود زمان اسکرول با استفاده از IntersectionObserver (تغییر بند ۸)
-const animationObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      // اضافه کردن کلاس شو برای شروع انیمیشن نرم سی‌اس‌اس
-      entry.target.classList.add("show-animate");
-      // پس از لود انیمیشن، آبزرور را متوقف می‌کنیم تا پرفورمنس مرورگر حفظ شود
-      animationObserver.unobserve(entry.target);
-    }
-  });
-}, {
-  // انیمیشن زمانی فعال می‌شود که حداقل ۱۰ درصد سکشن وارد صفحه شده باشد
-  threshold: 0.1,
-  rootMargin: "0px 0px -50px 0px"
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && navLinks.classList.contains("show")) {
+    setMenuOpen(false);
+    menuBtn.focus();
+  }
 });
 
-// فعال‌سازی روی تمام بخش‌هایی که کلاس انیمیشن دارند
-document.querySelectorAll(".hidden-animate").forEach((section) => {
-  animationObserver.observe(section);
+document.addEventListener("click", (event) => {
+  if (!navbar.contains(event.target)) setMenuOpen(false);
 });
 
-let lastScrollTop = 0;
-const navbar = document.querySelector(".nav");
+mobileLayout.addEventListener("change", () => setMenuOpen(false));
+
+// Content stays visible unless the observer is initialized successfully.
+const sections = document.querySelectorAll(".reveal");
+let animationObserver;
+function revealAllSections() {
+  animationObserver?.disconnect();
+  sections.forEach((section) => section.classList.remove("reveal-pending"));
+}
+
+if ("IntersectionObserver" in window && !reducedMotion.matches) {
+  try {
+    animationObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove("reveal-pending");
+          animationObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+    sections.forEach((section) => {
+      animationObserver.observe(section);
+      section.classList.add("reveal-pending");
+    });
+  } catch {
+    revealAllSections();
+  }
+}
+reducedMotion.addEventListener("change", (event) => {
+  if (event.matches) revealAllSections();
+});
+
+let lastScrollTop = Math.max(0, window.scrollY);
+let scrollDirection = 0;
+let scrollDistance = 0;
+const scrollThreshold = 10;
 
 window.addEventListener("scroll", () => {
-  let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  if (scrollTop > lastScrollTop && scrollTop > 150) {
-    navbar.style.transform = "translateY(-150%)"; // مخفی شدن در اسکرول به پایین
-  } else {
-    navbar.style.transform = "translateY(0)"; // ظاهر شدن در اسکرول به بالا
-  }
+  const scrollTop = Math.max(0, window.scrollY);
+  const delta = scrollTop - lastScrollTop;
   lastScrollTop = scrollTop;
-});
+
+  if (scrollTop <= 150 || navLinks.classList.contains("show")
+    || navbar.contains(document.activeElement)) {
+    navbar.classList.remove("nav-hidden");
+    scrollDirection = 0;
+    scrollDistance = 0;
+    return;
+  }
+  if (delta === 0) return;
+
+  const direction = Math.sign(delta);
+  scrollDistance = direction === scrollDirection
+    ? scrollDistance + Math.abs(delta) : Math.abs(delta);
+  scrollDirection = direction;
+  if (scrollDistance < scrollThreshold) return;
+
+  const hide = direction > 0;
+  if (navbar.classList.contains("nav-hidden") !== hide) {
+    navbar.classList.toggle("nav-hidden", hide);
+  }
+  scrollDistance = 0;
+}, { passive: true });
+navbar.addEventListener("focusin", () => navbar.classList.remove("nav-hidden"));

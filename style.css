@@ -2,7 +2,6 @@
 :root {
   --bg: #070c10;        /* زغال‌سنگی با تهونِ آبیِ سرد */
   --bg-soft: #101822;   /* دودیِ سرد (هاله‌ی نوریِ کاملاً خنثی و جذاب) */
-  --card: #17212b;      /* کارت‌های تیره و یکدست */
   --text: #e2e8f0;      /* سفیدِ ماتِ استخوانی */
   --muted: #8b9bb4;     /* خاکستریِ سرد */
 
@@ -25,7 +24,6 @@ body{
   position: relative;
 }
 
-/* لایه گرید پس‌زمینه مهندسی و مدرن (تغییر بند ۲) */
 body::before{
   content:"";
   position:fixed;
@@ -44,7 +42,7 @@ a{text-decoration:none;color:inherit}
   padding: 70px 0;
   scroll-margin-top: 90px; /* فوت کوزه‌گری: وقتی روی لینک‌های منو کلیک می‌کنی، تگ h2 دقیقاً زیرِ کپسول وایسه، نه پشتش! */
 }
-h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradient(135deg, #fff 0%, #9ca3af 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradient(135deg, #fff 0%, #9ca3af 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;}
 
 /* ناوبری هوشمند */
 .nav {
@@ -68,46 +66,11 @@ h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradi
   transition: transform 0.3s ease;
 }
 
-.logo {
-  font-weight: 800;
-  font-size: 18px;
-  background: linear-gradient(90deg, #fff, var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 .nav-links{display:flex;gap:25px;list-style:none;margin:0;padding:0}
 .nav-links a{color:#cbd5e1; font-weight: 500; transition: 0.2s;}
 .nav-links a:hover{color:var(--primary)}
-.menu-btn{display:none;background:none;border:none;color:#fff;font-size:28px}
-
-/* استایل بخش پروفایل و اطلاعات دانشجویی (تغییر بند ۱۰) */
-.identity-badge {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 20px;
-}
-.badge-tag {
-  align-self: flex-start;
-  background: rgba(6, 182, 212, 0.1);
-  color: var(--primary);
-  border: 1px solid rgba(6, 182, 212, 0.2);
-  padding: 4px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-.badge-sub {
-  color: var(--muted);
-  font-size: 14px;
-  font-weight: 500;
-}
-.university-text {
-  margin: 2px 0 0;
-  font-size: 13px;
-  color: var(--violet);
-}
+.menu-btn{display:none;background:none;border:none;color:#fff;font-size:28px;cursor:pointer}
+.nav-controls{display:flex;align-items:center;gap:12px}
 
 .hero {
   display: grid;
@@ -117,7 +80,7 @@ h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradi
   padding: 96px 0 70px; /* پدینگ بالا از 56 به 96 افزایش پیدا کرد تا نره زیر منو */
 }
 .hero h1{font-size:clamp(34px,4.5vw,56px);line-height:1.3;margin:0 0 15px; font-weight: 800;}
-.hero h1 span{background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+.hero h1 span{background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;}
 .lead{font-size:19px; color: #cbd5e1; line-height: 1.7;}
 
 /* ستون‌های ۳ گانه هویتی فوری */
@@ -143,13 +106,7 @@ h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradi
 .btn{padding:12px 24px;border-radius:12px;font-weight:700; transition: 0.25s;}
 .btn.primary{background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color:#0b0f19; box-shadow: 0 4px 20px rgba(6, 182, 212, 0.25);}
 .btn.primary:hover{transform: translateY(-2px); box-shadow: 0 6px 24px rgba(6, 182, 212, 0.4);}
-.btn.ghost{border:1px solid var(--border);color:#cbd5e1; background: rgba(255,255,255,0.02);}
-.btn.ghost:hover{background: rgba(255,255,255,0.07); color: #fff;}
 
-.hero-mini{display:flex;flex-wrap:wrap;gap:20px;color:#cbd5e1;font-size:14px}
-.hero-mini i{color:var(--primary);margin-left:4px; font-size: 16px;}
-
-/* دایره‌ای کردن پروفایل و ایجاد افکت گلو پریمیوم (تغییر بند ۳) */
 .hero-image-outer {
   display: flex;
   justify-content: center;
@@ -169,7 +126,6 @@ h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradi
   background: var(--bg);
 }
 
-/* ساختار جدید و پویای کارت‌ها (تغییر بند ۴) */
 .card{
   background: linear-gradient(145deg, rgba(31, 41, 55, 0.7) 0%, rgba(17, 24, 39, 0.7) 100%);
   border:1px solid var(--border);
@@ -187,7 +143,6 @@ h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradi
 
 .meta{color:var(--primary);font-size:14px;margin-top:4px; font-weight: 500;}
 
-/* ارتقای جدی بخش مهارت‌ها و پروگرس بارها (تغییر بند ۵) */
 /* استایل جدید مهارت‌ها با تم ترمینال (مستطیل‌های توپر و نقطه چین) */
 .terminal-skills-grid {
   display: grid;
@@ -221,7 +176,7 @@ h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradi
   font-size: 15px;
 }
 
-.term-name i {
+.term-name .icon {
   color: var(--primary);
   font-size: 22px;
 }
@@ -239,6 +194,18 @@ h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradi
   font-family: 'Courier New', Courier, monospace;
   font-size: 18px;
   letter-spacing: 1px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 .term-bar .solid {
@@ -274,11 +241,14 @@ h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradi
   gap:16px;
 }
 
+
 /* بخش زبان‌ها */
 .lang-row{margin-bottom:20px}
 .lang-row:last-child{margin-bottom:0}
 .lang-title{display:flex;justify-content:space-between;margin-bottom:8px; font-weight: 600;}
-.lang-title span { color: var(--muted); font-size: 13px; }
+.lang-title .lang-level { color: var(--muted); font-size: 13px; }
+.lang-name{display:inline-flex;align-items:center;gap:8px}
+.country-flag{display:inline-block;width:24px;height:18px;flex-shrink:0;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,0.15)}
 .progress{
   width:100%;height:10px;background:#0b1220;border-radius:999px;overflow:hidden;
   border:1px solid rgba(255,255,255,0.05);
@@ -289,7 +259,7 @@ h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradi
 }
 
 .contact-card p{display:flex;align-items:center;gap:10px; font-size: 16px;}
-.contact-card i{color:var(--primary); font-size: 20px;}
+.contact-card .icon{color:var(--primary); font-size: 20px;}
 
 .footer{
   border-top:1px solid rgba(255,255,255,0.05);
@@ -300,27 +270,33 @@ h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradi
   font-size: 14px;
 }
 
-/* کلاس‌های سیستم انیمیشن ورود هوشمند (تغییر بند ۸) */
-.hidden-animate {
-  opacity: 0;
-  transform: translateY(30px);
+.reveal {
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.show-animate {
-  opacity: 1;
-  transform: translateY(0);
+.reveal-pending {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.nav-hidden { transform: translateY(-150%); }
+.nav:focus-within { transform: translateY(0); }
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  fill: currentColor;
+  vertical-align: -0.125em;
 }
 
 /* ریسپانسیو اختصاصی موبایل */
 @media (max-width:850px){
   .hero{grid-template-columns:1fr; text-align: center; gap: 35px; padding-top: 120px;}
-  .identity-badge { align-items: center; }
-  .badge-tag { align-self: center; }
+
   .hero-pillars { flex-direction: column; gap: 10px; }
   .hero-actions{justify-content: center;}
-  .hero-mini{justify-content: center;}
+
   .hero-image-wrap{width:230px;height:230px}
-  
+
   .menu-btn{display:block}
   .nav-links {
     position: absolute;
@@ -355,7 +331,7 @@ h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradi
   transition: 0.25s;
 }
 
-.btn.github-btn i {
+.btn.github-btn .icon {
   font-size: 20px;
   color: var(--primary); /* آیکون گیت‌هاب فیروزه‌ای لود می‌شود */
 }
@@ -391,7 +367,6 @@ h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradi
   font-weight: 600;
   color: #cbd5e1;
   transition: all 0.3s ease;
-  margin-right: 15px; /* فاصله از دکمه منو در موبایل */
 }
 
 .lang-switch:hover {
@@ -401,26 +376,8 @@ h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradi
   transform: translateY(-2px);
 }
 
-/* فونت اختصاصی برای صفحه انگلیسی */
-[dir="ltr"] {
-  font-family: 'Inter', "Vazirmatn", sans-serif;
-}
-
-/* تنظیم جایگاه دکمه زبان در موبایل */
-@media (max-width: 850px) {
-  .nav-controls {
-    display: flex;
-    align-items: center;
-  }
-}
 /* استایل لوگوی تصویری در منو */
-.logo {
-  display: flex;
-  align-items: center;
-  /* حذف بک‌گراند گرادیانت قبلی که برای متن بود تا روی عکس تاثیر نگذارد */
-  background: none; 
-  -webkit-text-fill-color: initial;
-}
+.logo { display: flex; align-items: center; }
 
 .nav-logo-img {
   height: 38px; /* ارتفاع دقیق و متناسب برای منوی کپسولی */
@@ -432,4 +389,10 @@ h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradi
 .nav-logo-img:hover {
   transform: scale(1.08); /* افکت بزرگ‌نمایی ملایم هنگام هاور */
   box-shadow: 0 0 15px rgba(0, 210, 170, 0.4); /* هاله نور سبز کله‌غازی ملایم */
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .reveal-pending { opacity: 1; transform: none; }
+  .hover-lift:hover, .btn:hover, .lang-switch:hover, .nav-logo-img:hover { transform: none; }
 }
