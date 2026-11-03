@@ -70,6 +70,14 @@ h2{margin-bottom:30px;font-size:32px; font-weight: 800; background: linear-gradi
 .nav-links a{color:#cbd5e1; font-weight: 500; transition: 0.2s;}
 .nav-links a:hover{color:var(--primary)}
 .menu-btn{display:none;background:none;border:none;color:#fff;font-size:28px;cursor:pointer}
+.menu-line {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .2s ease;
+}
+.menu-btn[aria-expanded="true"] .menu-line-top { transform: translateY(5px) rotate(45deg); }
+.menu-btn[aria-expanded="true"] .menu-line-middle { opacity: 0; transform: scaleX(.2); }
+.menu-btn[aria-expanded="true"] .menu-line-bottom { transform: translateY(-5px) rotate(-45deg); }
 .nav-controls{display:flex;align-items:center;gap:12px}
 
 .hero {
